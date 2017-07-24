@@ -373,7 +373,7 @@
                 }
             ]
         },
-        {
+       {
             "type": "Microsoft.Resources/deployments",
             "name": "UpdateVNetDNS",
             "apiVersion": "[variables('deploymentApiVersion')]",
@@ -387,8 +387,22 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                   "networkSettings": {
-                        "value": "[variables('networkSettings')]"
+                    "virtualNetworkName": {
+                        "value": "[variables('networkSettings').virtualNetworkName]"
+                    },
+                    "virtualNetworkAddressRange": {
+                        "value": "[variables('networkSettings').addressPrefix]"
+                    },
+                    "subnetName": {
+                        "value": "[variables('networkSettings').subnet1Name]"
+                    },
+                    "subnetRange": {
+                        "value": "[variables('networkSettings').subnet1Prefix]"
+                    },
+                    "DNSServerAddress": {
+                        "value": [
+                            "[variables('adNicIPAddress')]"
+                        ]
                     }
                 }
             }
