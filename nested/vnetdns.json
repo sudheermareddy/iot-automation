@@ -2,59 +2,30 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "virtualNetworkName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the Virtual Network to Create"
-      }
-    },
-    "virtualNetworkAddressRange": {
-      "type": "string",
-      "metadata": {
-        "description": "The address range of the new VNET in CIDR format"
-      },
-      "defaultValue": "10.0.0.0/16"
-    },
-    "subnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the subnet created in the new VNET"
-      }
-    },
-    "subnetRange": {
-      "type": "string",
-      "metadata": {
-        "description": "The address range of the subnet created in the new VNET"
-      },
-      "defaultValue": "10.0.0.0/24"
-    },
-    "DNSServerAddress": {
-      "type": "array",
-      "metadata": {
-        "description": "The DNS address(es) of the DNS Server(s) used by the VNET"
-      }
-    }
+     "networkSettings": {
+            "type": "object"
+        }
   },
   "resources": [
     {
       "type": "Microsoft.Network/virtualNetworks",
-      "name": "[parameters('virtualNetworkName')]",
+      "name": "[parameters('networkSettings').virtualNetworkName]",
       "apiVersion": "2016-03-30",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('networkSettings').location]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[parameters('virtualNetworkAddressRange')]"
+            "[parameters('networkSettings').addressPrefix]"
           ]
         },
         "dhcpOptions": {
-          "dnsServers": "[parameters('DNSServerAddress')]"
+          "dnsServers": "[parameters('networkSettings').DNSServerAddress]"
         },
         "subnets": [
           {
-            "name": "[parameters('subnetName')]",
+            "name": "[parameters('networkSettings').subnet1Name]",
             "properties": {
-              "addressPrefix": "[parameters('subnetRange')]"
+              "addressPrefix": "[parameters('networkSettings').subnet1Prefix]"
             }
           }
         ]
