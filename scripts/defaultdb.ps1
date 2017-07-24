@@ -1,3 +1,15 @@
-$client = new-object System.Net.WebClient
-$client.DownloadFile("https://raw.githubusercontent.com/sysgain/iot-automation/master/scripts/SQLQuery2.sql","C:\test.sql")
-sqlcmd.exe -S sqlvm -U sqluser -P Sysgain@1234 -i C:\test.sql -o "c:\Testoutput.txt"
+param(
+[string] $sqlQueryUrl = "$1",
+[string] $serverName = "$2",
+[string] $sqlUserName = "$3",
+[string] $sqlserverpwd = "$4",
+[string] $piserverscript = "$5",
+[string] $databaseName = "$6"
+)
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  -Force
+$client = New-Object System.Net.WebClient
+$client.DownloadFile($sqlQueryUrl,"C:\createdb.sql")
+cd C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn
+sqlcmd.exe -S $serverName -U $sqlUserName -P $sqlserverpwd -i C:\createdb.sql -o "C:\Testoutput.txt"
+$client.DownloadFile($piserverscript,"C:\piserverscript.sql")
+Invoke-sqlcmd -inputfile "C:\piserverscript.sql" -serverinstance $serverName -U $sqlUserName -P $sqlserverpwd -database $databaseName 
