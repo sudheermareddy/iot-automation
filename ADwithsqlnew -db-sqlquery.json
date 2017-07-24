@@ -125,7 +125,7 @@
         },
         "networkSettings": {
             "location": "[resourceGroup().location]",
-            "networkApiVersion": "2016-03-30",
+            "networkApiVersion": "2015-06-15",
             "virtualNetworkName": "virtualnetwork",
             "addressPrefix": "10.0.0.0/16",
             "subnet1Name": "subnet1",
@@ -135,8 +135,7 @@
             "subnet3Name": "subnet3",
             "subnet3Prefix": "10.0.2.0/24",
             "subnet4Name": "subnet4",
-            "subnet4Prefix": "10.0.3.0/24",
-            "DNSServerAddress":"[variables('adNicIPAddress')]"
+            "subnet4Prefix": "10.0.3.0/24"
         },
          "baseUrl": "https://raw.githubusercontent.com/sysgain/iot-automation/dev/",
         "dscScriptUrl": "https://github.com/sysgain/iot-automation/raw/dev",
