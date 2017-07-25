@@ -25,14 +25,14 @@
                             "sourceAddressPrefix": "*",
                             "destinationAddressPrefix": "*",
                             "access": "Deny",
-                            "priority": 100,
+                            "priority": 1000,
                             "direction": "Inbound"
                         }
                     },
                     {
                         "name": "default-allow-rdp",
                         "properties": {
-                            "priority": 1000,
+                            "priority": 100,
                             "sourceAddressPrefix": "*",
                             "protocol": "TCP",
                             "destinationPortRange": "3389",
@@ -45,7 +45,7 @@
                     {
                         "name": "default-allow-sql",
                         "properties": {
-                            "priority": 1001,
+                            "priority": 101,
                             "sourceAddressPrefix": "*",
                             "protocol": "TCP",
                             "destinationPortRange": "1433",
