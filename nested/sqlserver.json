@@ -44,7 +44,7 @@
                             "storageAccountType": "Premium_LRS"
                         }
                     },
-                     "dataDisks": [
+                    "dataDisks": [
                         {
                             "name": "[concat(parameters('sqlserversettings').managedDiskName,'1')]",
                             "createOption": "Attach",
@@ -118,11 +118,11 @@
                 }
             }
         },
-         {
+        {
             "name": "[concat(parameters('sqlserversettings').sqlservername,'/CustomScriptExtension')]",
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "location": "[resourceGroup().location]",
-            "apiVersion":"[parameters('sqlserversettings').computeApiVersion]",
+            "apiVersion": "[parameters('sqlserversettings').computeApiVersion]",
             "dependsOn": [
                 "[concat('Microsoft.Compute/virtualMachines/',parameters('sqlserversettings').sqlservername,'/extensions/SqlIaasExtension')]"
             ],
@@ -208,6 +208,19 @@
                             "destinationPortRange": "1433",
                             "access": "Allow",
                             "direction": "Inbound",
+                            "sourcePortRange": "*",
+                            "destinationAddressPrefix": "*"
+                        }
+                    },
+                    {
+                        "name": "https",
+                        "properties": {
+                            "priority": 1002,
+                            "sourceAddressPrefix": "*",
+                            "protocol": "TCP",
+                            "destinationPortRange": "443",
+                            "access": "Allow",
+                            "direction": "Outbound",
                             "sourcePortRange": "*",
                             "destinationAddressPrefix": "*"
                         }
