@@ -41,19 +41,6 @@
                             "sourcePortRange": "*",
                             "destinationAddressPrefix": "*"
                         }
-                    },
-                    {
-                        "name": "Deny-Internet-All1",
-                        "properties": {
-                            "protocol": "*",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "*",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "*",
-                            "access": "Deny",
-                            "priority": 100,
-                            "direction": "Outbound"
-                        }
                     }
                 ]
             }
