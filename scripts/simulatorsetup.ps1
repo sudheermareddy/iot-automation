@@ -6,7 +6,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  -Force
 $client = new-object System.Net.WebClient
 $client.DownloadFile($simulatorUrl,"C:\SimulatorSetup.msi")
 invoke-command -computername $sqlservername -scriptblock {msiexec /qr /i "C:\SimulatorSetup.msi"}
-$piserverconfig = 'C:\Program Files (x86)\Default Company Name\SimulatorSetup\PiServerSimulator.exe.config
+$piserverconfig = 'C:\Program Files (x86)\Default Company Name\SimulatorSetup\PiServerSimulator.exe.config'
 $doc = (Get-Content $piserverconfig) -as [Xml]
 $obj = $doc.configuration.appSettings.add | where {$_.Key -eq 'PiConnectionString'}
 $obj.value = 'Data Source=sqlvm; Initial Catalog=iottestdb; Persist Security Info=True; User ID=sqluser; Password=Sysgain@1234'
