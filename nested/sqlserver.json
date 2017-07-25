@@ -7,8 +7,8 @@
         }
     },
     "variables": {
-        "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('sqlserversettings').virtualNetworkName)]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('sqlserversettings').subnetName)]"
+        "vnetId": "[resourceId('Microsoft.Network/virtualNetworks',parameters('sqlserversettings').virtualNetworkName)]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/',parameters('sqlserversettings').subnetName)]"
     },
     "resources": [
         {
