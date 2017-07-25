@@ -144,7 +144,7 @@
         {
             "name": "[parameters('sqlserversettings').networkInterfaceName]",
             "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2016-09-01",
+            "apiVersion": "[parameters('sqlserversettings').networkApiVersion]",
             "location": "[parameters('sqlserversettings').location]",
             "dependsOn": [
                 "[concat('Microsoft.Network/publicIpAddresses/', parameters('sqlserversettings').publicIpAddressName)]",
@@ -173,7 +173,7 @@
         {
             "name": "[parameters('sqlserversettings').publicIpAddressName]",
             "type": "Microsoft.Network/publicIpAddresses",
-            "apiVersion": "2016-09-01",
+            "apiVersion": "[parameters('sqlserversettings').networkApiVersion]",
             "location": "[parameters('sqlserversettings').location]",
             "properties": {
                 "publicIpAllocationMethod": "Dynamic"
@@ -182,7 +182,7 @@
         {
             "name": "[parameters('sqlserversettings').networkSecurityGroupName]",
             "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2016-09-01",
+            "apiVersion": "[parameters('sqlserversettings').networkApiVersion]",
             "location": "[parameters('sqlserversettings').location]",
             "properties": {
                 "securityRules": [
