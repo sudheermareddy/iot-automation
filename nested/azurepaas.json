@@ -43,7 +43,7 @@
                             ],
                             "properties": {
                                 "storageKeyType": "[parameters('AzurePaasevi').storageKeyType]",
-                                "storageKey": "[parameters('AzurePaasevi')._artifactsLocationSasToken]",
+                                "storageKey": "[parameters('AzurePaasevi').storagekey]",
                                 "storageUri": "https://emreleasemtr.blob.core.windows.net/releasemtr/PowerGrid.bacpac",
                                 "administratorLogin": "[parameters('AzurePaasevi').AzureSqlLogin]",
                                 "administratorLoginPassword": "[parameters('AzurePaasevi').AzureSqlPwd]",
