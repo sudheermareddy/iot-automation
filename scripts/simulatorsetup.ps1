@@ -1,13 +1,12 @@
 param(
 [string] $simulatorUrl = "$1",
-[string] $sqlservername = "$2",
-[string] $classscheduleurl = "$3",
-[string] $dataserviceappurl = "$4"
+[string] $sqlservername = "$2"
 )
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  -Force
 $client = new-object System.Net.WebClient
 $client.DownloadFile($simulatorUrl,"C:\SimulatorSetup.msi")
-
+$client.DownloadFile("https://iotapps1.blob.core.windows.net/classschedule/ClassSchedule_PiServer1.csv","C:\ClassSchedule_PiServer1.csv")
+$client.DownloadFile("https://iotapps1.blob.core.windows.net/dataserviceapp/DataServiceAppSetup.msi","C:\DataServiceAppSetup.msi")
 #invoke-command -computername $sqlservername -scriptblock {msiexec /qr /i "C:\SimulatorSetup.msi"}
 #$piserverconfig = "C:\Program Files (x86)\Default Company Name\SimulatorSetup\PiServerSimulator.exe.config"
 #$doc = (Get-Content $piserverconfig) -as [Xml]
