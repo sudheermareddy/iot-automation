@@ -4,6 +4,9 @@
     "parameters": {
         "location":{
             "type": "string"
+        },
+         "sqlservername":{
+            "type": "string"
         }
     },
     "variables": {
