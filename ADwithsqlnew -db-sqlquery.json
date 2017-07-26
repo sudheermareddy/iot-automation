@@ -93,12 +93,13 @@
         "sqlserversettings": {
             "location": "[resourceGroup().location]",
             "computeApiVersion": "2016-04-30-preview",
+            "networkApiVersion": "2016-09-01",
             "adminUsername": "sqluser",
             "adminPassword": "Sysgain@1234",
             "virtualNetworkName": "[variables('networkSettings').virtualNetworkName]",
             "networkInterfaceName": "sqlNic",
             "networkSecurityGroupName": "sqlNsg",
-            "subnetName": "[variables('networkSettings').subnet1Name]",
+            "subnetName": "[variables('networkSettings').subnet3Name]",
             "publicIpAddressName": "sqlpip",
             "sqlAuthenticationLogin": "sqluser",
             "sqlAuthenticationPassword": "Sysgain@1234",
@@ -114,19 +115,35 @@
             "managedDiskName": "[variables('managedDiskName')]",
             "scriptFileName": "[variables('scriptFileName')]",
             "scriptFileName2": "defaultdb.ps1",
+            "scriptFileName3": "simulatorsetup.ps1",
             "domainName": "[variables('domainName')]",
             "Username": "[parameters('Username')]",
             "Password": "[parameters('Password')]",
             "fileUris": "[concat(variables('baseUrl'),'scripts/psscript.ps1')]",
             "fileUris2": "[concat(variables('baseUrl'),'scripts/defaultdb.ps1')]",
+            "fileUris3": "[concat(variables('baseUrl'),'scripts/simulatorsetup.ps1')]",
             "sqlQueryUrl": "[concat(variables('baseUrl'),'scripts/SQLQuery2.sql')]",
-             "piserverscript": "[concat(variables('baseUrl'),'scripts/PiServerSQLscript.sql')]",
-            "databaseName": "iottestdb"
+            "piserverscript": "[concat(variables('baseUrl'),'scripts/PiServerSQLscript.sql')]",
+            "databaseName": "iottestdb",
+            "simulatorUrl": "https://iotapps1.blob.core.windows.net/simulator/SimulatorSetup.msi"
+        },
+        "AzurePaasevi": {
+            "AzureSqlLogin": "azurelogin",
+            "AzureSqlPwd": "Sysgain@1234",
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "databaseName": "dbtest",
+            "edition": "Standard",
+            "requestedServiceObjectiveName": "S2",
+            "maxSizeBytes": "268435456000",
+            "serverName": "azuresqlvm",
+            "sampleName": "null",
+            "storageKeyType": "SharedAccessKey",
+            "_artifactsLocationSasToken": "12234"
         },
         "networkSettings": {
             "location": "[resourceGroup().location]",
-            "networkApiVersion": "2015-06-15",
-            "virtualNetworkName": "virtualnetwork",
+            "networkApiVersion": "2016-03-30",
+            "virtualNetworkName": "vnet",
             "addressPrefix": "10.0.0.0/16",
             "subnet1Name": "subnet1",
             "subnet1Prefix": "10.0.0.0/24",
@@ -137,16 +154,16 @@
             "subnet4Name": "subnet4",
             "subnet4Prefix": "10.0.3.0/24"
         },
-         "baseUrl": "https://raw.githubusercontent.com/sysgain/iot-automation/dev/",
+        "baseUrl": "https://raw.githubusercontent.com/sysgain/iot-automation/dev/",
         "dscScriptUrl": "https://github.com/sysgain/iot-automation/raw/dev",
-        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('networkSettings').virtualNetworkName)]",
-        "adsubnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet1Name)]",
+        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
+        "adsubnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet2Name)]",
         "virtualNetworksResourcesURL": "[concat(variables('baseUrl'),'nested/virtualNetwork.json')]",
         "adLBFE": "LBFE",
         "adLBBE": "LBBE",
         "adRDPNAT": "adRDP",
         "adNicName": "adNic",
-        "adNicIPAddress": "10.0.0.4",
+        "adNicIPAddress": "10.0.1.4",
         "adVMName": "adVM",
         "publicIPAddressName": "adPublicIP",
         "adAvailabilitySetName": "adAvailabiltySet",
@@ -186,11 +203,11 @@
             "apiVersion": "[variables('computeApiVersion')]",
             "location": "[resourceGroup().location]",
             "properties": {
-                "platformUpdateDomainCount": 3,
-                "platformFaultDomainCount": 3
+                "platformUpdateDomainCount": 2,
+                "platformFaultDomainCount": 2
             }
         },
-      {
+        {
             "name": "virtualNetworksResource",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "[variables('deploymentApiVersion')]",
@@ -372,7 +389,7 @@
                 }
             ]
         },
-       {
+        {
             "type": "Microsoft.Resources/deployments",
             "name": "UpdateVNetDNS",
             "apiVersion": "[variables('deploymentApiVersion')]",
@@ -386,17 +403,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "virtualNetworkName": {
-                        "value": "[variables('networkSettings').virtualNetworkName]"
-                    },
-                    "virtualNetworkAddressRange": {
-                        "value": "[variables('networkSettings').addressPrefix]"
-                    },
-                    "subnetName": {
-                        "value": "[variables('networkSettings').subnet1Name]"
-                    },
-                    "subnetRange": {
-                        "value": "[variables('networkSettings').subnet1Prefix]"
+                    "networkSettings": {
+                        "value": "[variables('networkSettings')]"
                     },
                     "DNSServerAddress": {
                         "value": [
@@ -448,7 +456,46 @@
                 }
             }
         },
-
+        {
+            "type": "Microsoft.Resources/deployments",
+            "name": "sqlSimulatorSetup",
+            "apiVersion": "[variables('deploymentApiVersion')]",
+            "dependsOn": [
+                "sqlDbSetup"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('baseUrl'), 'nested/sqlsimulator.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "sqlserversettings": {
+                        "value": "[variables('sqlserversettings')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "name": "AzuresqlServerSetup",
+            "apiVersion": "[variables('deploymentApiVersion')]",
+            "dependsOn": [
+                "sqlSimulatorSetup"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('baseUrl'), 'nested/azurepaas.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "AzurePaasevi": {
+                        "value": "[variables('AzurePaasevi')]"
+                    }
+                }
+            }
+        },
         {
             "type": "Microsoft.Compute/disks",
             "name": "[concat(variables('managedDiskName'),copyIndex())]",
