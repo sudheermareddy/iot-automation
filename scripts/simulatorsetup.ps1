@@ -1,6 +1,6 @@
 param(
 [string] $simulatorUrl = "$1",
-[string] $sqlservername = "$2",
+[string] $sqlservername = "$2"
 )
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  -Force
 $client = new-object System.Net.WebClient
