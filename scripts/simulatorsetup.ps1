@@ -12,6 +12,3 @@ $obj = $doc.configuration.appSettings.add | where {$_.Key -eq 'PiConnectionStrin
 $obj.value = 'Data Source=sqlvm; Initial Catalog=iottestdb; Persist Security Info=True; User ID=sqluser; Password=Sysgain@1234'
 $doc.Save($piserverconfig)
 Start-Process -FilePath " C:\Program Files (x86)\Default Company Name\SimulatorSetup\PiServerSimulator.exe "
-
-  
-            
