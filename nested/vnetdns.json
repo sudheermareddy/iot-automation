@@ -37,28 +37,19 @@
                     {
                         "name": "[parameters('networkSettings').subnet2Name]",
                         "properties": {
-                            "addressPrefix": "[parameters('networkSettings').subnet2Prefix]",
-                            "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('networkSettings').nsg)]"
-                            }
+                            "addressPrefix": "[parameters('networkSettings').subnet2Prefix]"
                         }
                     },
                     {
                         "name": "[parameters('networkSettings').subnet3Name]",
                         "properties": {
-                            "addressPrefix": "[parameters('networkSettings').subnet3Prefix]",
-                            "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('networkSettings').nsg)]"
-                            }
+                            "addressPrefix": "[parameters('networkSettings').subnet3Prefix]"
                         }
                     },
                     {
                         "name": "[parameters('networkSettings').subnet4Name]",
                         "properties": {
-                            "addressPrefix": "[parameters('networkSettings').subnet4Prefix]",
-                            "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('networkSettings').nsg)]"
-                            }
+                            "addressPrefix": "[parameters('networkSettings').subnet4Prefix]"
                         }
                     }
                 ]
