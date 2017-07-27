@@ -135,10 +135,9 @@
             "edition": "Standard",
             "requestedServiceObjectiveName": "S2",
             "maxSizeBytes": "268435456000",
-            "serverName": "azuresqlvm",
-            "sampleName": "null",
+            "serverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]",
             "storageKeyType": "SharedAccessKey",
-            "_artifactsLocationSasToken": "12234"
+            "storageKey":"?"
         },
         "networkSettings": {
             "location": "[resourceGroup().location]",
