@@ -35,7 +35,7 @@
                     },
                     "resources": [
                         {
-                            "name": "Import",
+                            "name": "myImport",
                             "type": "extensions",
                             "apiVersion": "2014-04-01-preview",
                             "dependsOn": [
@@ -43,8 +43,8 @@
                             ],
                             "properties": {
                                 "storageKeyType": "[parameters('AzurePaasevi').storageKeyType]",
-                                "storageKey": "[parameters('AzurePaasevi').storagekey]",
-                                "storageUri": "https://emreleasemtr.blob.core.windows.net/releasemtr/PowerGrid.bacpac",
+                                "storageKey": "[parameters('AzurePaasevi').storageKey]",
+                                "storageUri": "https://iotapps1.blob.core.windows.net/backpacfile/PowerGrid.bacpac",
                                 "administratorLogin": "[parameters('AzurePaasevi').AzureSqlLogin]",
                                 "administratorLoginPassword": "[parameters('AzurePaasevi').AzureSqlPwd]",
                                 "operationMode": "Import"
