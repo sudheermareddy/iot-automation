@@ -32,7 +32,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', variables('scriptFileName3'),' ',variables('simulatorUrl'),' ',variables('sqlservername'))]"
+                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', variables('scriptFileName3'),' ',variables('simulatorUrl'),' ',parameters('sqlservername'))]"
                 }
             }
         }
