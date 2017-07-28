@@ -44,7 +44,7 @@
                             "properties": {
                                 "storageKeyType": "[parameters('AzurePaasevi').storageKeyType]",
                                 "storageKey": "[parameters('AzurePaasevi').storageKey]",
-                                "storageUri": "https://projectiot.blob.core.windows.net/iotp2/EnergyManagement.bacpac",
+                                "storageUri": "https://projectiot.blob.core.windows.net/iotp1/PowerGrid.bacpacc",
                                 "administratorLogin": "[parameters('AzurePaasevi').AzureSqlLogin]",
                                 "administratorLoginPassword": "[parameters('AzurePaasevi').AzureSqlPwd]",
                                 "operationMode": "Import"
