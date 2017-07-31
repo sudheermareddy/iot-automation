@@ -5,7 +5,7 @@ param(
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  -Force
 $client = new-object System.Net.WebClient
 $client.DownloadFile($simulatorUrl,"C:\SimulatorSetup.msi")
-$client.DownloadFile("https://projectiot.blob.core.windows.net/iotp1/DataServiceAppSetup.msi","C:\DataServiceAppSetup.msi")
+$client.DownloadFile("https://projectiot.blob.core.windows.net/iotp2/DataServiceSetup.msi","C:\DataServiceAppSetup.msi")
 #invoke-command -computername $sqlservername -scriptblock {msiexec /qr /i "C:\SimulatorSetup.msi"} -ArgumentList null
 C:\SimulatorSetup.msi /qn
 #msiexec.exe /i "C:\SimulatorSetup.msi" /qn 
