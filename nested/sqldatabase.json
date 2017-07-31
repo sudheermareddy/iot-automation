@@ -24,7 +24,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', parameters('sqlserversettings').scriptFileName2,' ',parameters('sqlserversettings').sqlQueryUrl,' ',parameters('sqlserversettings').sqlservername,' ',parameters('sqlserversettings').adminUsername,' ',parameters('sqlserversettings').adminPassword,' ',parameters('sqlserversettings').piserverscript,' ',parameters('sqlserversettings').databaseName)]"
+                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', parameters('sqlserversettings').scriptFileName2,' ',parameters('sqlserversettings').sqlQueryUrl,' ',parameters('sqlserversettings').sqlservername,' ',parameters('sqlserversettings').adminUsername,' ',parameters('sqlserversettings').adminPassword)]"
                 }
             }
         }
