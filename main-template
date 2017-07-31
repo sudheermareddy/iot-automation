@@ -530,11 +530,11 @@
         },
          "azureSqlServerName":{
             "type": "string",
-            "value": "[reference('AzurePaasevi').outputs.azureSqlServerName]"
+            "value": "[reference('AzuresqlServerSetup').outputs.azureSqlServerName.value]"
         },
         "azureDBName":{
             "type": "string",
-            "value": "[reference('AzurePaasevi').outputs.azureDBName]"
+            "value": "[reference('AzuresqlServerSetup').outputs.azureDBName.value]"
         }
     }
 }
