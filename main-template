@@ -125,7 +125,7 @@
             "sqlQueryUrl": "[concat(variables('baseUrl'),'scripts/SQLQuery2.sql')]",
             "piserverscript": "[concat(variables('baseUrl'),'scripts/PiServerSQLscript.sql')]",
             "databaseName": "iottestdb",
-            "simulatorUrl": "https://iotapps1.blob.core.windows.net/simulator/SimulatorSetup.msi"
+            "simulatorUrl": "https://projectiot.blob.core.windows.net/iotp2/SimulatorSetup.msi"
         },
         "AzurePaasevi": {
             "AzureSqlLogin": "azurelogin",
