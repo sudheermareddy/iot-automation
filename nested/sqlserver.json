@@ -11,17 +11,17 @@
         "subnetRef": "[concat(variables('vnetId'), '/subnets/',parameters('sqlserversettings').subnetName)]"
     },
     "resources": [
-         {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('sqlserversettings').sqlStorageAccountName]",
-      "apiVersion": "[parameters('sqlserversettings').storageApiVersion]",
-      "location": "[parameters('sqlserversettings').location]",
-      "sku": {
-        "name": "Standard_LRS"
-      },
-      "kind": "Storage",
-      "properties": {}
-    },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('sqlserversettings').sqlStorageAccountName]",
+            "apiVersion": "[parameters('sqlserversettings').storageApiVersion]",
+            "location": "[parameters('sqlserversettings').location]",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "kind": "Storage",
+            "properties": {}
+        },
         {
             "name": "[parameters('sqlserversettings').sqlservername]",
             "type": "Microsoft.Compute/virtualMachines",
@@ -74,12 +74,12 @@
                         }
                     ]
                 },
-                 "diagnosticsProfile": {
-          "bootDiagnostics": {
-            "enabled": "true",
-            "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', parameters('sqlserversettings').sqlStorageAccountName)).primaryEndpoints.blob]"
-          }
-        }
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "true",
+                        "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', parameters('sqlserversettings').sqlStorageAccountName)).primaryEndpoints.blob]"
+                    }
+                }
             }
         },
         {
@@ -250,6 +250,14 @@
         "adminUsername": {
             "type": "string",
             "value": "[parameters('sqlserversettings').adminUsername]"
+        },
+        "listKeysOutput": {
+            "type": "string",
+            "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlserversettings').sqlStorageAccountName), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+        },
+        "storageAccountName": {
+            "type": "string",
+            "value": "[parameters('sqlserversettings').sqlStorageAccountName]"
         }
     }
 }
