@@ -92,6 +92,7 @@
     "variables": {
         "sqlserversettings": {
             "location": "[resourceGroup().location]",
+            "storageApiVersion":"2016-01-01",
             "computeApiVersion": "2016-04-30-preview",
             "networkApiVersion": "2016-09-01",
             "adminUsername": "sqluser",
@@ -103,6 +104,7 @@
             "publicIpAddressName": "sqlpip",
             "sqlAuthenticationLogin": "sqluser",
             "sqlAuthenticationPassword": "Sysgain@1234",
+            "SQLstorageAccountName": "[concat(uniquestring(resourceGroup().id), 'sqlvm')]",
             "sqlservername": "sqlvm",
             "vmSize": "Standard_DS1_v2",
             "sqlConnectivityType": "Private",
@@ -125,7 +127,7 @@
             "sqlQueryUrl": "[concat(variables('baseUrl'),'scripts/SQLQuery2.sql')]",
             "piserverscript": "[concat(variables('baseUrl'),'scripts/PiServerSQLscript.sql')]",
             "databaseName": "iottestdb",
-            "simulatorUrl": "https://projectiot.blob.core.windows.net/iotp2/SimulatorSetup.msi"
+            "simulatorUrl": "https://projectiot.blob.core.windows.net/iotp1/SimulatorSetup.msi"
         },
         "AzurePaasevi": {
             "AzureSqlLogin": "azurelogin",
