@@ -11,6 +11,17 @@
         "subnetRef": "[concat(variables('vnetId'), '/subnets/',parameters('sqlserversettings').subnetName)]"
     },
     "resources": [
+         {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('sqlserversettings').SQLstorageAccountName]",
+      "apiVersion": "[parameters('sqlserversettings').storageApiVersion]",
+      "location": "[parameters('sqlserversettings').location]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "Storage",
+      "properties": {}
+    },
         {
             "name": "[parameters('sqlserversettings').sqlservername]",
             "type": "Microsoft.Compute/virtualMachines",
@@ -62,7 +73,13 @@
                             "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('sqlserversettings').networkInterfaceName)]"
                         }
                     ]
-                }
+                },
+                 "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": "true",
+            "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', parameters('sqlserversettings').SQLstorageAccountName)).primaryEndpoints.blob]"
+          }
+        }
             }
         },
         {
