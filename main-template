@@ -92,7 +92,7 @@
     "variables": {
         "sqlserversettings": {
             "location": "[resourceGroup().location]",
-            "storageApiVersion":"2016-01-01",
+            "storageApiVersion": "2016-01-01",
             "computeApiVersion": "2016-04-30-preview",
             "networkApiVersion": "2016-09-01",
             "adminUsername": "sqluser",
@@ -104,7 +104,7 @@
             "publicIpAddressName": "sqlpip",
             "sqlAuthenticationLogin": "sqluser",
             "sqlAuthenticationPassword": "Sysgain@1234",
-            "SQLstorageAccountName": "[concat(uniquestring(resourceGroup().id), 'sqlvm')]",
+            "sqlStorageAccountName": "[concat(uniquestring(resourceGroup().id), 'sqlvm')]",
             "sqlservername": "sqlvm",
             "vmSize": "Standard_DS1_v2",
             "sqlConnectivityType": "Private",
@@ -139,7 +139,7 @@
             "maxSizeBytes": "268435456000",
             "serverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]",
             "storageKeyType": "SharedAccessKey",
-            "storageKey":"?"
+            "storageKey": "?"
         },
         "networkSettings": {
             "location": "[resourceGroup().location]",
@@ -514,5 +514,27 @@
                 "diskSizeGB": "[variables('diskSizeGB')]"
             }
         }
-    ]
+    ],
+    "outputs": {
+        "adminUsername": {
+            "type": "string",
+            "value": "[reference('sqlServerSetup').outputs.adminUsername.value]"
+        },
+        "listKeysOutput": {
+            "type": "string",
+            "value": "[reference('sqlServerSetup').outputs.listKeysOutput.value]"
+        },
+        "storageAccountName": {
+            "type": "string",
+            "value": "[reference('sqlServerSetup').outputs.storageAccountName.value]"
+        },
+         "azureSqlServerName":{
+            "type": "string",
+            "value": "[reference('AzurePaasevi').outputs.azureSqlServerName]"
+        },
+        "azureDBName":{
+            "type": "string",
+            "value": "[reference('AzurePaasevi').outputs.azureDBName]"
+        }
+    }
 }
