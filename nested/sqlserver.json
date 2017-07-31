@@ -13,7 +13,7 @@
     "resources": [
          {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('sqlserversettings').SQLstorageAccountName]",
+      "name": "[parameters('sqlserversettings').sqlStorageAccountName]",
       "apiVersion": "[parameters('sqlserversettings').storageApiVersion]",
       "location": "[parameters('sqlserversettings').location]",
       "sku": {
