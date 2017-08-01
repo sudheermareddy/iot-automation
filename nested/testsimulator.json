@@ -7,9 +7,6 @@
         },
          "sqlservername":{
             "type": "string"
-        },
-        "dataserviceUrl":{
-            "type": "string"
         }
     },
     "variables": {
