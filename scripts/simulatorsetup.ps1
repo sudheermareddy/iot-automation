@@ -6,6 +6,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  -Force
 $client = new-object System.Net.WebClient
 $client.DownloadFile($simulatorUrl,"C:\SimulatorSetup.msi")
 C:\SimulatorSetup.msi /qn
+Start-Sleep -s 12
 #$client.DownloadFile("https://projectiot.blob.core.windows.net/iotp2/DataServiceSetup.msi","C:\DataServiceAppSetup.msi")
 #C:\DataServiceSetup.msi /qn
 $piserverconfig = "C:\Program Files (x86)\Default Company Name\SimulatorSetup\PiServerSimulator.exe.config"
