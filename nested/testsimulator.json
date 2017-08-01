@@ -15,7 +15,8 @@
     "variables": {
         "scriptFileName3":"simulatorsetup.ps1",
         "fileUri":"https://raw.githubusercontent.com/sysgain/iot-automation/dev/scripts/simulatorsetup.ps1",
-         "simulatorUrl":"https://projectiot.blob.core.windows.net/iotp2/SimulatorSetup.msi"
+         "simulatorUrl":"https://projectiot.blob.core.windows.net/iotp2/SimulatorSetup.msi",
+        "dataserviceUrl":"https://projectiot.blob.core.windows.net/iotp2/DataServiceSetup.msi"
 
     },
     "resources": [
@@ -35,7 +36,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', variables('scriptFileName3'),' ',variables('simulatorUrl'),' ',parameters('dataserviceUrl'))]"
+                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', variables('scriptFileName3'),' ',variables('simulatorUrl'),' ',variables('dataserviceUrl'))]"
                 }
             }
         }
