@@ -24,7 +24,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', parameters('sqlserversettings').scriptFileName3,' ',parameters('sqlserversettings').simulatorUrl,' ',parameters('sqlserversettings').sqlservername)]"
+                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', parameters('sqlserversettings').scriptFileName3,' ',parameters('sqlserversettings').simulatorUrl,' ',parameters('sqlserversettings').dataserviceUrl)]"
                 }
             }
         }
