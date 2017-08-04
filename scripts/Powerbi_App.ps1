@@ -5,7 +5,10 @@
 
 
 param(
-[string] $TenantId, [string] $DisplayName, [string] $IdentifierUris)
+[string] $TenantId = "$1",
+[string] $DisplayName = "$2",
+[string] $IdentifierUris = "$3"
+)
 
 Install-Module AzureADPreview
 
