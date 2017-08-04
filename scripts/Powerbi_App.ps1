@@ -15,7 +15,7 @@ Install-Module AzureADPreview
 $azureAccountName ="nvtuluva@sysgaincloud.onmicrosoft.com"
 $azurePassword = ConvertTo-SecureString "indiatimes@225" -AsPlainText -Force
 $psCred = New-Object System.Management.Automation.PSCredential($azureAccountName, $azurePassword)
-Connect-AzureAD -TenantId $TenantId -Credential $psCred -InformationAction Ignore
+ Connect-AzureAD -TenantId $TenantId -Credential $psCred -InformationAction Ignore
 $aad = (Get-AzureADServicePrincipal | `
     where {$_.ServicePrincipalNames.Contains("https://graph.windows.net")})[0]
 #  Grab the User.Read permission
