@@ -7,6 +7,6 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  -Force
 $client = new-object System.Net.WebClient
 $client.DownloadFile($simulatorUrl,"C:\SimulatorSetup.msi")
 Start-Sleep -s 12
-$client.DownloadFile($dataserviceUrl,"C:\DataServiceAppSetup.msi")
+$client.DownloadFile($dataserviceUrl,"C:\DataServiceSetup.msi")
 Start-Sleep -s 12
 $client.DownloadFile($PIWebApisimulatorUrl,"C:\PIWebApiSimulatorSetup.msi")
