@@ -292,10 +292,34 @@
             }
         },
         {
+            "name": "[concat(parameters('sqlServerSettings').sqlservername,'/CustomScriptExtension')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "[parameters('apiVersions').computeApiVersion]",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/',parameters('sqlServerSettings').sqlservername,'/extensions/SqlIaasExtension')]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.8",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris": [
+                        "[parameters('sqlServerSettings').fileUris]"
+                    ]
+                },
+                "protectedSettings": {
+                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', parameters('sqlServerSettings').scriptFileName,' ',parameters('sqlServerSettings').domainName,' ',parameters('sqlServerSettings').Username,' ',parameters('sqlServerSettings').Password)]"
+                }
+            }
+        },
+        {
             "type": "Microsoft.Resources/deployments",
             "name": "sqlSimulatorSetup",
             "apiVersion": "[parameters('apiVersions').deploymentApiVersion]",
             "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/',parameters('sqlServerSettings').sqlservername,'/extensions/CustomScriptExtension')]"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -328,30 +352,6 @@
                     "PIWebApiSimulatorUrl": {
                         "value": "[parameters('sqlServerSettings').PIWebApiSimulatorUrl]"
                     }
-                }
-            }
-        },
-        {
-            "name": "[concat(parameters('sqlServerSettings').sqlservername,'/CustomScriptExtension')]",
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "location": "[resourceGroup().location]",
-            "apiVersion": "[parameters('apiVersions').computeApiVersion]",
-            "dependsOn": [
-                "sqlSimulatorSetup",
-                "[concat('Microsoft.Compute/virtualMachines/',parameters('sqlServerSettings').sqlservername,'/extensions/SqlIaasExtension')]"
-            ],
-            "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.8",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "fileUris": [
-                        "[parameters('sqlServerSettings').fileUris]"
-                    ]
-                },
-                "protectedSettings": {
-                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', parameters('sqlServerSettings').scriptFileName,' ',parameters('sqlServerSettings').domainName,' ',parameters('sqlServerSettings').Username,' ',parameters('sqlServerSettings').Password)]"
                 }
             }
         }
