@@ -22,6 +22,34 @@
             "metadata": {
                 "description": "The FQDN of the Active Directory Domain to be created on VM"
             }
+        },
+        "azureAccountUsername": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Username for Azure Account"
+            }
+        },
+        "azureAccountPassword": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Password for Azure Account"
+            }
+        },
+        "tenantID": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "tenantID for Azure Account"
+            }
+        },
+        "applicationName": {
+            "type": "string",
+            "defaultValue": "iotapp",
+            "metadata": {
+                "decription": "Application name for Active Directory"
+            }
         }
     },
     "variables": {
@@ -154,6 +182,13 @@
             "licenseMode": "10",
             "TenantIdentifier": "NA",
             "TenantActivationPassword": "NA",
+            "azureAccountUsername":"[parameters('azureAccountUsername')]",
+            "azureAccountPassword":"[parameters('azureAccountPassword')]",
+            "tenantID":"[parameters('tenantID')]",
+            "applicationName":"[parameters('applicationName')]",
+            "uniqueString":"[variables('suffix')]",
+            "appCreationURL":"[concat(variables('baseUrl'),'nested/appCreation.json')]",
+            "appScriptUrl": "[concat(variables('baseUrl'),'nested/powerBIApp.ps1')]",
             "ManagerAddress": "[concat(variables('publicIPDomainNameLabelTrendDSM'),'.',resourceGroup().location,'.cloudapp.azure.com')]",
             "newsqlServerName": "[tolower(concat('trend',uniquestring(resourceGroup().id),'-sql'))]",
             "azuresqlUrl": "[concat(variables('baseUrl'),'/nested/database-new.json')]",
