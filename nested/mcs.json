@@ -383,6 +383,7 @@
                 }
             ]
         },
+        
         {
             "type": "Microsoft.Network/virtualNetworks",
             "name": "[parameters('networkSettings').virtualNetworkName]",
