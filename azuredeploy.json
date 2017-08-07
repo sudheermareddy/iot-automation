@@ -301,7 +301,14 @@
             "adstorageAccountName": "[concat('adstrg',variables('suffix'))]",
             "diskCreateOption": "empty",
             "diskSizeGB": "1023",
-            "dscScriptUrl": "[variables('dscScriptUrl')]"
+            "dscScriptUrl": "[variables('dscScriptUrl')]",
+            "azureAccountUsername":"[parameters('azureAccountUsername')]",
+            "azureAccountPassword":"[parameters('azureAccountPassword')]",
+            "tenantID":"[parameters('tenantID')]",
+            "applicationName":"[parameters('applicationName')]",
+            "uniqueString":"[variables('suffix')]",
+            "appCreationURL":"[concat(variables('baseUrl'),'nested/appCreation.json')]",
+            "appScriptUrl": "[concat(variables('baseUrl'),'scripts/powerbiapp.ps1')]",
         },
         "sqlServerSettings": {
             "location": "[resourceGroup().location]",
