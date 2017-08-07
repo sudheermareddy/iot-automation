@@ -11,7 +11,6 @@ param(
 [string] $UniqueString
 )
 $IdentifierUris = "https://${DisplayName}${UniqueString}.azurewebsites.net"
-echo $IdentifierUris
 
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted  -Force
 Install-Module AzureADPreview -Force
