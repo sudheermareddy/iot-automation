@@ -188,7 +188,7 @@
             "applicationName":"[parameters('applicationName')]",
             "uniqueString":"[variables('suffix')]",
             "appCreationURL":"[concat(variables('baseUrl'),'nested/appCreation.json')]",
-            "appScriptUrl": "[concat(variables('baseUrl'),'nested/powerBIApp.ps1')]",
+            "appScriptUrl": "[concat(variables('baseUrl'),'scripts/powerbiapp.ps1')]",
             "ManagerAddress": "[concat(variables('publicIPDomainNameLabelTrendDSM'),'.',resourceGroup().location,'.cloudapp.azure.com')]",
             "newsqlServerName": "[tolower(concat('trend',uniquestring(resourceGroup().id),'-sql'))]",
             "azuresqlUrl": "[concat(variables('baseUrl'),'/nested/database-new.json')]",
