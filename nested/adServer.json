@@ -165,6 +165,50 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "name": "ApplicationCreation",
+            "apiVersion": "[parameters('apiVersions').deploymentApiVersion]",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('adServerSettings').adVMName,'/extensions/CreateADForest')]"
+            ],
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[parameters('adServerSettings').appCreationURL]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "adVMName": {
+                        "value": "[parameters('adServerSettings').adVMName]"
+                    },
+                    "location": {
+                        "value": "[parameters('adServerSettings').location]"
+                    },
+                    "computeApiVersion": {
+                        "value": "[parameters('apiVersions').computeApiVersion]"
+                    },
+                    "azureAccountUsername": {
+                        "value": "[parameters('adServerSettings').azureAccountUsername]"
+                    },
+                    "azureAccountPassword": {
+                        "value": "[parameters('adServerSettings').azureAccountPassword]"
+                    },
+                    "tenantID": {
+                        "value": "[parameters('adServerSettings').tenantID]"
+                    },
+                    "applicationName": {
+                        "value": "[parameters('adServerSettings').applicationName]"
+                    },
+                    "uniqueString": {
+                        "value": "[parameters('adServerSettings').uniqueString]"
+                    },
+                     "appScriptUrl": {
+                        "value": "[parameters('adServerSettings').appScriptUrl]"
+                    }
+                }
+            }
         }
     ]
 }
