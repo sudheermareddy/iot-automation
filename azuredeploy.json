@@ -31,7 +31,7 @@
             }
         },
         "azureAccountPassword": {
-            "type": "string",
+            "type": "securestring",
             "defaultValue": "",
             "metadata": {
                 "description": "Password for Azure Account"
